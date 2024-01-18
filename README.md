@@ -1,14 +1,6 @@
 # cypress-allure-plugin
 
-[![SWUbanner](https://raw.githubusercontent.com/vshymanskyy/StandWithUkraine/main/banner2-direct.svg)](https://vshymanskyy.github.io/StandWithUkraine/)
-
-> Plugin for integrating allure reporter in Cypress with support of Allure API.
-
-![Build][gh-image]
-[![Downloads][downloads-image]][npm-url]
-[![semantic-release][semantic-image]][semantic-url]  
-[![version][version-image]][npm-url]
-[![License][license-image]][license-url]
+>Modified cypress-allure-plugin that will mark the flaky tests based on the error types
 
 ## Installation
 
