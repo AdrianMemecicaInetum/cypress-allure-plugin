@@ -28,6 +28,8 @@ module.exports = class AllureReporter {
         this.config = options;
         this.defineSuiteLabelsFn = (titles) => titles;
         this.defineHistoryId = (testTitle) => testTitle;
+        this.flakyErrors = options.customErrors();
+
     }
 
     /**
@@ -525,11 +527,23 @@ module.exports = class AllureReporter {
                 test.state,
                 test.err && {
                     message: test.err.message,
-                    trace: test.err.stack
+                    trace: test.err.stack.toString(),
+                    flaky: this.isTestFlaky(test)
                 }
             );
         }
         this.currentTest.endTest();
+    }
+
+    //checks if the test is flaky based on a series of typical errors
+    isTestFlaky(test) {
+        if (test.err.stack && this.flakyErrors) {
+            // Check if the error stack includes any of the flaky errors
+            return this.flakyErrors.some(errorString => 
+                test.err.stack.toString().includes(errorString)
+            );
+        }
+        return false;
     }
 
     loggingCommandStepsEnabled(enabled) {

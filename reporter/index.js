@@ -53,6 +53,10 @@ const config = {
     clearSkipped: () => env('allureClearSkippedTests') === true,
     addAnalyticLabels: () => env('allureAddAnalyticLabels'),
     addVideoOnPass: () => env('allureAddVideoOnPass'),
+    customErrors: () => {
+        const errorsString = env('flakyErrors');
+        return errorsString ? JSON.parse(errorsString) : [];
+      },
     skipAutomaticScreenshots: () =>
         env('allureSkipAutomaticScreenshots') === true,
     loggingCommandStepsEnabled: true,

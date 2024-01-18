@@ -8,6 +8,8 @@ const path = require('path');
 const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
+    video:false,
+    screenshotOnRunFailure:false,
     e2e: {
         setupNodeEvents: async function (on, config) {
             await addCucumberPreprocessorPlugin(on, config);
@@ -91,7 +93,8 @@ module.exports = defineConfig({
             return config;
         },
         env: {
-            stepDefinitions: `cypress/e2e/cucumber/**/*.cy.js`
+            stepDefinitions: `cypress/e2e/cucumber/**/*.cy.js`,
+            flakyErrors: JSON.stringify(["TypeError", "prueba"])
         }
     }
 });
